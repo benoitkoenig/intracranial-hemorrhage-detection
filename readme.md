@@ -6,7 +6,7 @@ Author: Benoît Koenig
 
 ### Usage:
 
-- No commands are available yet
+- Train the U-Net classifier with a specific backbone: python -m classification.train [resnet50|densenet169]
 
 #### Note
 
