@@ -7,7 +7,7 @@ from intracranial_hemorrhage_detection.params import tf_image_size
 
 def get_classifier(backbone_name):
     "Returns a classifier model. backbone_name must be one of 'resnet50', 'densenet169'"
-    assert (backbone_name == "resnet50") | (backbone_name == "densenet169")
+    assert backbone_name in ["resnet50", "densenet169"]
 
     if (backbone_name == "resnet50"):
         backbone = ResNet50(
@@ -24,7 +24,7 @@ def get_classifier(backbone_name):
 
     x = backbone.output
     x = GlobalAveragePooling2D()(x)
-    x = Dropout(0.5)(x)
+    x = Dropout(0.1)(x)
     predictions = Dense(6, activation='sigmoid')(x)
     classifier = Model(inputs=backbone.input, outputs=predictions)
 

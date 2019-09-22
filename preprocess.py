@@ -6,12 +6,12 @@ import tensorflow as tf
 from intracranial_hemorrhage_detection.constants import folder_path, image_size, label_ranks
 from intracranial_hemorrhage_detection.params import tf_image_size
 
-def get_all_images_id(folder):
+def get_all_images_list(folder):
     """
     Loads a list of all images in a given folder name. Returns a list of (id, filepath)\n
     folder can be either 'stage_1_train' or 'stage_1_test'
     """
-    assert (folder == "stage_1_train") | (folder == "stage_1_test")
+    assert folder in ["stage_1_train", "stage_1_test"]
 
     dirname = folder_path + "/data/%s_images/" % folder
     return [(filename[:-4], dirname + filename) for filename in os.listdir(dirname)]
