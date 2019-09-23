@@ -12,14 +12,14 @@ def get_classifier(backbone_name):
     if (backbone_name == "resnet50"):
         backbone = ResNet50(
             include_top=False,
-            weights="imagenet",
-            input_shape=(tf_image_size, tf_image_size, 3),
+            weights=None,
+            input_shape=(tf_image_size, tf_image_size, 1),
         )
     elif (backbone_name == "densenet169"):
         backbone = DenseNet169(
             include_top=False,
-            weights="imagenet",
-            input_shape=(tf_image_size, tf_image_size, 3),
+            weights=None,
+            input_shape=(tf_image_size, tf_image_size, 1),
         )
 
     x = backbone.output

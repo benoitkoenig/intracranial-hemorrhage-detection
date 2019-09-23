@@ -5,3 +5,5 @@ labels = ["epidural", "intraparenchymal", "intraventricular", "subarachnoid", "s
 label_ranks = {}
 for i in range(len(labels)):
     label_ranks[labels[i]] = i
+
+stage_1_training_count = 674262

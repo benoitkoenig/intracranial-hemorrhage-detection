@@ -25,7 +25,6 @@ def get_tf_image(filepath):
     dicom_data = get_dicom_data(filepath)
     image = tf.convert_to_tensor(dicom_data.pixel_array, dtype=tf.float32)
     image = tf.reshape(image, (1, image_size, image_size, 1))
-    image = tf.image.grayscale_to_rgb(image)
     image = tf.image.resize(image, (tf_image_size, tf_image_size), align_corners=True, method=tf.image.ResizeMethod.AREA)
     return image
 
