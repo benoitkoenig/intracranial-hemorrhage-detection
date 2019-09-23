@@ -6,7 +6,7 @@ Author: Benoît Koenig
 
 ### Usage:
 
-- Train the U-Net classifier with a specific backbone: python -m classification.train [resnet50|densenet169]
+- Train the classifier: python -m classification.train
 
 - Visualize a single dicom file: python -m show.dicom_file [stage_1_train|stage_1_test] [index]
 
