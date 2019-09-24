@@ -3,7 +3,7 @@ import os
 import pydicom
 import tensorflow as tf
 
-from intracranial_hemorrhage_detection.constants import folder_path, image_size, label_ranks
+from intracranial_hemorrhage_detection.constants import folder_path, label_ranks
 from intracranial_hemorrhage_detection.params import tf_image_size
 
 def get_all_images_list(folder):
@@ -24,7 +24,7 @@ def get_tf_image(filepath):
     "Given a filepath, return the image as a resized tensor"
     dicom_data = get_dicom_data(filepath)
     image = tf.convert_to_tensor(dicom_data.pixel_array, dtype=tf.float32)
-    image = tf.reshape(image, (1, image_size, image_size, 1))
+    image = tf.reshape(image, (1, image.shape[0], image.shape[1], 1))
     image = tf.image.resize(image, (tf_image_size, tf_image_size), align_corners=True, method=tf.image.ResizeMethod.AREA)
     return image
 
