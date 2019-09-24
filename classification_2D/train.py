@@ -1,4 +1,4 @@
-from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
+from keras.callbacks import ModelCheckpoint # , ReduceLROnPlateau
 from keras.models import load_model, save_model
 from keras.optimizers import Adam
 import sys
@@ -13,7 +13,7 @@ def train_classifier():
     graph = tf.Graph()
     callbacks = [
         ModelCheckpoint(folder_path + "/weights/classifier.hdf5"),
-        ReduceLROnPlateau(monitor="loss", factor=lr_factor, patience=lr_patience, verbose=1),
+        # ReduceLROnPlateau(monitor="loss", factor=lr_factor, patience=lr_patience, verbose=1),
     ]
     gen = training_generator(graph)
     with graph.as_default():
