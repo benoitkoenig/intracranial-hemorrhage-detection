@@ -10,6 +10,8 @@ Author: Benoît Koenig
 
 - Visualize a single dicom file: python -m show.dicom_file [stage_1_train|stage_1_test] [index]
 
+- Group dicom datas by study ids and store them in csv: python -m create_study_wise_data
+
 #### Note
 
 tensorflow-gpu is not included in requirements.txt as it is not always relevant. To use the GPU, install tensorflow-gpu via "pip install tensorflow-gpu"
