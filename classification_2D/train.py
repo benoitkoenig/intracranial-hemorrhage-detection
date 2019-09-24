@@ -4,16 +4,16 @@ from keras.optimizers import Adam
 import sys
 import tensorflow as tf
 
-from intracranial_hemorrhage_detection.classification.model import get_model
-from intracranial_hemorrhage_detection.classification.params import steps_per_epoch, epochs, lr_init, lr_factor, lr_patience, lr_min
-from intracranial_hemorrhage_detection.classification.training_generator import training_generator
+from intracranial_hemorrhage_detection.classification_2D.model import get_model
+from intracranial_hemorrhage_detection.classification_2D.params import steps_per_epoch, epochs, lr_init, lr_factor, lr_patience
+from intracranial_hemorrhage_detection.classification_2D.training_generator import training_generator
 from intracranial_hemorrhage_detection.constants import folder_path
 
 def train_classifier():
     graph = tf.Graph()
     callbacks = [
         ModelCheckpoint(folder_path + "/weights/classifier.hdf5"),
-        ReduceLROnPlateau(monitor="loss", factor=lr_factor, patience=lr_patience, min_lr=lr_min),
+        ReduceLROnPlateau(monitor="loss", factor=lr_factor, patience=lr_patience, verbose=1),
     ]
     gen = training_generator(graph)
     with graph.as_default():
