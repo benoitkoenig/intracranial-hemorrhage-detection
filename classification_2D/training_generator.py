@@ -1,3 +1,4 @@
+import gc
 import numpy as np
 import random
 import tensorflow as tf
@@ -37,4 +38,5 @@ def training_generator(graph):
         with graph.as_default():
             tf_image = get_tf_image(filepath)
             true_label = tf.convert_to_tensor([true_labels[id]], dtype=tf.float32)
+        gc.collect()
         yield ([tf_image], [true_label])
