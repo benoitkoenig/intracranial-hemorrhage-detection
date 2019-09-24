@@ -1,6 +1,6 @@
 from intracranial_hemorrhage_detection.constants import stage_1_training_any_count
 
-steps_per_epoch = 15
+steps_per_epoch = 45
 subset_size = 2 * stage_1_training_any_count
 epochs = subset_size // steps_per_epoch
 
