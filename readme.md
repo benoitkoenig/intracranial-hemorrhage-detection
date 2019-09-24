@@ -6,7 +6,7 @@ Author: Benoît Koenig
 
 ### Usage:
 
-- Train the classifier: python -m classification.train
+- Train the 2D classifier: python -m classification_2D.train
 
 - Visualize a single dicom file: python -m show.dicom_file [stage_1_train|stage_1_test] [index]
 
