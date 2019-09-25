@@ -1,9 +1,7 @@
-import numpy as np
 import random
 import tensorflow as tf
 
 from intracranial_hemorrhage_detection.classification_2D.params import subset_size, batch_size
-from intracranial_hemorrhage_detection.params import tf_image_size
 from intracranial_hemorrhage_detection.preprocess import get_all_images_list, get_tf_image, get_all_true_labels
 
 def create_subset(images_list, true_labels):
@@ -26,8 +24,9 @@ def create_subset(images_list, true_labels):
 
 def training_generator(graph):
     """
-    Yields a tuple (image, true_labels). Image is a tensor of shape (1, tf_image_size, tf_image_size, 3) and true_labels is a tensor of shape (1, 6)\n
-    Due to the way generators work, it is required to specify the graph to work on\n
+    Yields a tuple (image, true_labels). Image is a tensor of shape (1, tf_image_size, tf_image_size, 1) and true_labels is a tensor of shape (1, 6)\n
+    The generator uses a subset of all slices. The size of the subset is defined in the parameters\n
+    Due to the way generators work, it is required to specify the graph to work on
     """
     images_list = get_all_images_list("stage_1_train")
     random.shuffle(images_list)
