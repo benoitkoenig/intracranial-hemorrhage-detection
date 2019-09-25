@@ -1,4 +1,4 @@
-from intracranial_hemorrhage_detection.constants import stage_1_training_any_count
+from intracranial_hemorrhage_detection.constants import folder_path, stage_1_training_any_count
 
 steps_per_epoch = 8
 batch_size = 8
@@ -7,3 +7,4 @@ epochs = subset_size // (steps_per_epoch * batch_size)
 
 learning_rate = 1e-6
 input_image_size = 128
+model_weights_path = folder_path + "/weights/classifier.hdf5"
