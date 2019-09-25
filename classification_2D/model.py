@@ -29,12 +29,6 @@ def get_model():
     x = MaxPool2D()(x)
     x = BatchNormalization(axis=-1)(x)
 
-    x = Conv2D(1024, (3, 3), activation="relu", kernel_initializer="he_uniform")(x)
-    x = Conv2D(1024, (3, 3), activation="relu", kernel_initializer="he_uniform")(x)
-    x = Conv2D(2048, (3, 3), activation="relu", kernel_initializer="he_uniform")(x)
-    x = MaxPool2D()(x)
-    x = BatchNormalization(axis=-1)(x)
-
     x = Flatten()(x)
     x = Dense(1024, activation='relu', kernel_initializer="he_uniform")(x)
     x = Dense(1024, activation='linear', kernel_initializer="he_uniform")(x)
