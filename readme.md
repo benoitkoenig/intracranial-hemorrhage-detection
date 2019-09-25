@@ -10,4 +10,6 @@ Author: Benoît Koenig
 
 - Visualize a single dicom file: python -m show.dicom_file [stage_1_train|stage_1_test] [index]
 
-- Group dicom datas by study ids and store them in csv: python -m create_study_wise_data
+- Group dicom datas by study ids and store them in study_ids.csv: python -m create_study_wise_data
+
+- Calculate and export predictions to results.csv: python -m export_predictions
