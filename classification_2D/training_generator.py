@@ -18,7 +18,7 @@ def create_subset(images_list, true_labels):
         if (any_count == subset_size // 2) & (none_count == subset_size // 2):
             assert len(subset) == subset_size
             return subset
-    print("\n\n****Warning\nCreate_subset did not return with a full subset. The training will likely interumpted by an error message\n")
+    print("\n\n****Warning\nCreate_subset did not return with a full subset. The training will likely be interumpted by an error message\n")
     return subset
 
 def training_generator():
@@ -28,7 +28,7 @@ def training_generator():
     true_labels = get_all_true_labels()
     subset = create_subset(images_list, true_labels)
     random.shuffle(subset)
-    while True:
+    while (len(subset) != 0):
         batch = subset[0:batch_size]
         subset = subset[batch_size:]
         X = get_input_images([filepath for (_, filepath) in batch], input_image_size)
