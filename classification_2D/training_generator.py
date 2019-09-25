@@ -1,9 +1,9 @@
-import gc
 import numpy as np
 import random
 import tensorflow as tf
 
-from intracranial_hemorrhage_detection.classification_2D.params import subset_size
+from intracranial_hemorrhage_detection.classification_2D.params import subset_size, batch_size
+from intracranial_hemorrhage_detection.params import tf_image_size
 from intracranial_hemorrhage_detection.preprocess import get_all_images_list, get_tf_image, get_all_true_labels
 
 def create_subset(images_list, true_labels):
@@ -34,9 +34,11 @@ def training_generator(graph):
     true_labels = get_all_true_labels()
     subset = create_subset(images_list, true_labels)
     random.shuffle(subset)
-    for (id, filepath) in subset:
+    while True:
+        batch = subset[0:batch_size]
+        subset = subset[batch_size:]
+        Y = [true_labels[id] for (id, _) in batch]
         with graph.as_default():
-            tf_image = get_tf_image(filepath)
-            true_label = tf.convert_to_tensor([true_labels[id]], dtype=tf.float32)
-        gc.collect()
-        yield ([tf_image], [true_label])
+            X = [get_tf_image(filepath) for (_, filepath) in batch]
+            X = tf.concat(X, axis=0)
+        yield ([X], [Y])
