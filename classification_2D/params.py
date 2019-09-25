@@ -5,8 +5,8 @@ batch_size = 8
 subset_size = 2 * stage_1_training_any_count
 epochs = subset_size // (steps_per_epoch * batch_size)
 
-lr_init = 1e-4
+lr_init = 1e-5
 lr_factor = .1
-lr_patience = 6
+lr_patience = 8
 
 input_image_size = 128
