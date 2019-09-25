@@ -1,8 +1,7 @@
 import random
-import tensorflow as tf
 
-from intracranial_hemorrhage_detection.classification_2D.params import subset_size, batch_size
-from intracranial_hemorrhage_detection.preprocess import get_all_images_list, get_tf_image, get_all_true_labels
+from intracranial_hemorrhage_detection.classification_2D.params import subset_size, batch_size, input_image_size
+from intracranial_hemorrhage_detection.preprocess import get_all_images_list, get_input_images, get_all_true_labels
 
 def create_subset(images_list, true_labels):
     "Returns a subset with as many images with an hemorrhagge as without. Subset_size is defined in the params"
@@ -22,12 +21,8 @@ def create_subset(images_list, true_labels):
     print("\n\n****Warning\nCreate_subset did not return with a full subset. The training will likely interumpted by an error message\n")
     return subset
 
-def training_generator(graph):
-    """
-    Yields a tuple (image, true_labels). Image is a tensor of shape (1, tf_image_size, tf_image_size, 1) and true_labels is a tensor of shape (1, 6)\n
-    The generator uses a subset of all slices. The size of the subset is defined in the parameters\n
-    Due to the way generators work, it is required to specify the graph to work on
-    """
+def training_generator():
+    "Yields a tuple ([X], [Y]). X is a np array containing the images of shape (batch_size, input_image_size, input_image_size, 1) and true_labels is an array of 'shape' (batch_size, 6)"
     images_list = get_all_images_list("stage_1_train")
     random.shuffle(images_list)
     true_labels = get_all_true_labels()
@@ -36,8 +31,6 @@ def training_generator(graph):
     while True:
         batch = subset[0:batch_size]
         subset = subset[batch_size:]
+        X = get_input_images([filepath for (_, filepath) in batch], input_image_size)
         Y = [true_labels[id] for (id, _) in batch]
-        with graph.as_default():
-            X = [get_tf_image(filepath) for (_, filepath) in batch]
-            X = tf.concat(X, axis=0)
         yield ([X], [Y])

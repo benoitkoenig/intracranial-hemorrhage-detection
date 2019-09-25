@@ -3,12 +3,12 @@ from keras.applications.densenet import DenseNet169
 from keras.layers import BatchNormalization, Conv2D, Dense, Dropout, Flatten, GlobalAveragePooling2D, Input, MaxPool2D
 from keras.models import Model
 
-from intracranial_hemorrhage_detection.params import tf_image_size
+from intracranial_hemorrhage_detection.classification_2D.params import input_image_size
 
 def get_model():
     "Returns the classifier model"
 
-    input = Input(shape=(tf_image_size, tf_image_size, 1))
+    input = Input(shape=(input_image_size, input_image_size, 1))
     x = BatchNormalization(axis=-1)(input)
 
     x = Conv2D(128, (3, 3), activation="relu", kernel_initializer="he_uniform")(x)

@@ -1,0 +1,9 @@
+keras
+matplotlib
+numpy
+opencv-python
+pandas
+pydicom
+tensorflow-gpu
+
+# tensorflow-gpu is used by keras as the backend, which is why it is to be installed even though it is not explicitey used
