@@ -2,7 +2,7 @@ import pandas as pd
 
 from intracranial_hemorrhage_detection.constants import folder_path, labels
 
-export_file_path = folder_path + "/results.csv"
+export_file_path = "%s/outputs/results.csv" % folder_path
 columns = ["ID", "Label"]
 
 def clear_outputs_csv():

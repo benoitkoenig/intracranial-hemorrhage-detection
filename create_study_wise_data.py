@@ -23,6 +23,6 @@ def create_study_wise_data():
         study_ids_list.append(study_id)
         slice_ids.append(study_ids[study_id])
     df = pd.DataFrame({ "study_id": study_ids_list, "slice_ids": slice_ids }, columns=columns)
-    df.to_csv(folder_path + "/study_ids.csv", header=True, index=False)
+    df.to_csv("%s/outputs/study_ids.csv" % folder_path, header=True, index=False)
 
 create_study_wise_data()
