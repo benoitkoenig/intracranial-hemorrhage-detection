@@ -20,6 +20,7 @@ def get_smooth_loss_per_epoch(loss_per_epoch):
 plt.figure(figsize=(18, 12))
 plt.plot(loss_per_epoch, color="orange")
 plt.plot(get_smooth_loss_per_epoch(loss_per_epoch))
+plt.gcf().canvas.set_window_title("Loss per epoch")
 plt.title("Loss per epoch")
 
 plt.show()

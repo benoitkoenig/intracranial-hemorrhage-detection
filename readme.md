@@ -15,3 +15,5 @@ Author: Benoît Koenig
 - Visualize a single dicom file: python -m show.dicom_file [stage_1_train|stage_1_test] [index]
 
 - Visualize the evolution of the loss for the 2D classifier: python -m show.loss_graph
+
+- Visualize the 3D reconstruction for the 3D classifier: python -m show.reconstruction_3D
