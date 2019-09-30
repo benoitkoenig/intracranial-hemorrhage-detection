@@ -7,3 +7,4 @@ for i in range(len(labels)):
 
 stage_1_training_count = 674262
 stage_1_training_any_count = 97103
+stage_1_studies_count = 3 # edit with the real study count
