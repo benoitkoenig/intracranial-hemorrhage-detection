@@ -27,7 +27,6 @@ def preprocess_voxels(voxels):
     voxels = np.array(voxels, dtype=np.float32)
     voxels -= np.min(voxels)
     voxels /= np.max(voxels)
-    voxels = 2 * voxels - 1
     voxels = np.reshape(voxels, (number_of_slices, input_slice_size, input_slice_size, 1))
     return voxels
 

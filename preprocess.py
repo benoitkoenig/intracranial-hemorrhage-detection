@@ -32,7 +32,6 @@ def get_input_images(filepaths, input_image_size):
         image = cv2.resize(image, (input_image_size, input_image_size))
         image -= np.min(image)
         image /= np.max(image)
-        image = 2 * image - 1
         image = np.reshape(image, (input_image_size, input_image_size, 1))
         output.append(image)
     return np.array(output, dtype=np.float32)
