@@ -35,7 +35,7 @@ def get_input_images(filepaths, input_image_size):
         image = 2 * image - 1
         image = np.reshape(image, (input_image_size, input_image_size, 1))
         output.append(image)
-    return np.array(output)
+    return np.array(output, dtype=np.float32)
 
 def get_all_true_labels():
     "Returns a dict of all labels for all images"

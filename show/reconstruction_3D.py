@@ -1,5 +1,6 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import sys
 
@@ -11,6 +12,7 @@ def show_reconstruction_3D(study_id):
     slice_ids = eval(df[df["study_id"] == study_id]["slice_ids"].values[0])
     slices_filepaths = ["%s/data/stage_1_train_images/%s.dcm" % (folder_path, slice_id) for slice_id in slice_ids]
     voxels = generate_3D_image(slices_filepaths)
+    voxels = np.reshape(voxels, voxels.shape[:3]) # Remove the channels, which is a singleton
 
     plt.figure(figsize=(18, 12))
     fig = plt.gcf()
