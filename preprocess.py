@@ -30,6 +30,9 @@ def get_input_images(filepaths, input_image_size):
         dicom_data = get_dicom_data(filepath)
         image = np.array(dicom_data.pixel_array, dtype=np.float32)
         image = cv2.resize(image, (input_image_size, input_image_size))
+        image -= np.min(image)
+        image /= np.max(image)
+        image = 2 * image - 1
         image = np.reshape(image, (input_image_size, input_image_size, 1))
         output.append(image)
     return np.array(output)

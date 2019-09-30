@@ -1,6 +1,6 @@
 from keras.applications.resnet50 import ResNet50
 from keras.applications.densenet import DenseNet169
-from keras.layers import BatchNormalization, Conv2D, Dense, Flatten, Input, MaxPool2D
+from keras.layers import Conv2D, Dense, Flatten, Input, MaxPool2D
 from keras.models import Model
 
 from intracranial_hemorrhage_detection.classification_2D.params import input_image_size
@@ -9,9 +9,8 @@ def get_model():
     "Returns the classifier model"
 
     input = Input(shape=(input_image_size, input_image_size, 1))
-    x = BatchNormalization(axis=-1)(input)
 
-    x = Conv2D(64, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
+    x = Conv2D(64, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(input)
     x = Conv2D(64, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
     x = Conv2D(64, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
     x = MaxPool2D()(x)
