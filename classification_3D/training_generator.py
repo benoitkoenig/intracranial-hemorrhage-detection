@@ -9,7 +9,7 @@ from intracranial_hemorrhage_detection.constants import folder_path
 from intracranial_hemorrhage_detection.preprocess import get_all_true_labels
 
 def get_study_wise_data():
-    df = pd.read_csv("%s/outputs/study_ids.csv" % folder_path)
+    df = pd.read_csv("%s/outputs/study_ids_stage_1_train.csv" % folder_path)
     grouped_slice_ids = df["slice_ids"].values
     grouped_slice_ids = [eval(i) for i in grouped_slice_ids]
     return grouped_slice_ids
@@ -25,8 +25,6 @@ def training_generator():
 
         X = [generate_3D_image(slice_ids) for slice_ids in batch]
         Y = [np.array([true_labels[id] for id in slice_ids], dtype=np.float32) for slice_ids in batch]
-        for i in range(len(batch)):
-            (X[i], Y[i]) = add_padding(X[i], Y[i])
-        X = np.array(X, dtype=np.float32)
-        Y = np.array(Y, dtype=np.float32)
+        X = np.array([add_padding(x) for x in X])
+        Y = np.array([add_padding(y) for y in Y])
         yield ([X], [Y])

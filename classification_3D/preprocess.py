@@ -16,26 +16,9 @@ def preprocess_voxels(voxels):
     voxels = np.reshape(voxels, (number_of_slices, input_slice_size, input_slice_size, 1))
     return voxels
 
-def add_padding(voxels, labels):
-    """
-    Adds black slices on top and bottom of the voxels and zeros to the labels to end up with a constant height\n
-    voxels input shape is (?, input_slice_size, input_slice_size, 1) and outputs shape (max_slices_per_study, input_slice_size, input_slice_size, 1)\n
-    labels input shape is (?, 6) and outputs shape (max_slices_per_study, 6)
-    """
-    assert voxels.shape[0] == labels.shape[0]
-    assert voxels.shape[1:] == (input_slice_size, input_slice_size, 1)
-    assert labels.shape[1:] == (6,)
-
-    padding = (max_slices_per_study - voxels.shape[0]) / 2
-    padding_before = math.ceil(padding)
-    padding_after = math.floor(padding)
-
-    zeros_before_voxels = np.zeros((padding_before, input_slice_size, input_slice_size, 1), dtype=np.float32)
-    zeros_after_voxels = np.zeros((padding_after, input_slice_size, input_slice_size, 1), dtype=np.float32)
-    new_voxels = np.concatenate((zeros_before_voxels, voxels, zeros_after_voxels))
-
-    zeros_before_labels = np.zeros((padding_before, 6), dtype=np.float32)
-    zeros_after_labels = np.zeros((padding_after, 6), dtype=np.float32)
-    new_labels = np.concatenate((zeros_before_labels, labels, zeros_after_labels))
-
-    return (new_voxels, new_labels)
+def add_padding(input):
+    "For a np array of any shape, adds 0s along axis=0 so that the first dimension is max_slices_per_study"
+    padding = (max_slices_per_study - input.shape[0]) / 2
+    zeros_before = np.zeros([math.ceil(padding)] + list(input.shape[1:]))
+    zeros_after = np.zeros([math.floor(padding)] + list(input.shape[1:]))
+    return np.concatenate((zeros_before, input, zeros_after))

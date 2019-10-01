@@ -8,10 +8,9 @@ from intracranial_hemorrhage_detection.classification_3D.generate_3D_image impor
 from intracranial_hemorrhage_detection.constants import folder_path
 
 def show_reconstruction_3D(study_id):
-    df = pd.read_csv("%s/outputs/study_ids.csv" % folder_path)
+    df = pd.read_csv("%s/outputs/study_ids_stage_1_train.csv" % folder_path)
     slice_ids = eval(df[df["study_id"] == study_id]["slice_ids"].values[0])
-    slices_filepaths = ["%s/data/stage_1_train_images/%s.dcm" % (folder_path, slice_id) for slice_id in slice_ids]
-    voxels = generate_3D_image(slices_filepaths)
+    voxels = generate_3D_image(slice_ids)
     voxels = np.reshape(voxels, voxels.shape[:3]) # Remove the channels, which is a singleton
 
     plt.figure(figsize=(18, 12))
