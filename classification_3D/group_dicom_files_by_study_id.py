@@ -1,13 +1,14 @@
 import csv
 import pandas as pd
+import sys
 
 from intracranial_hemorrhage_detection.constants import folder_path
 from intracranial_hemorrhage_detection.preprocess import get_all_images_list, get_dicom_data
 
 columns = ["study_id", "slice_ids"]
 
-def create_study_wise_data():
-    all_files = get_all_images_list("stage_1_train")
+def group_dicom_files_by_study_id(folder):
+    all_files = get_all_images_list(folder)
     study_ids = {}
 
     for (slice_id, filepath) in all_files:
@@ -23,6 +24,16 @@ def create_study_wise_data():
         study_ids_list.append(study_id)
         slice_ids.append(study_ids[study_id])
     df = pd.DataFrame({ "study_id": study_ids_list, "slice_ids": slice_ids }, columns=columns)
-    df.to_csv("%s/outputs/study_ids.csv" % folder_path, header=True, index=False)
+    df.to_csv("%s/outputs/study_ids_%s.csv" % (folder_path, folder), header=True, index=False)
 
-create_study_wise_data()
+# Read arguments from python command
+folder = None
+for param in sys.argv:
+    if param in ["stage_1_train", "stage_1_test"]:
+        folder = param
+
+if (folder == None):
+    print("Usage: python classification_3D.group_dicom_files_by_study_id.py [stage_1_train|stage_1_test]")
+    exit(-1)
+
+group_dicom_files_by_study_id(folder)

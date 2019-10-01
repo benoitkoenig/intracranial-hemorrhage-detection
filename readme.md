@@ -8,7 +8,7 @@ Author: Benoît Koenig
 
 - Train the 2D classifier: python -m classification_2D.train
 
-- Group dicom datas by study ids and store them in study_ids.csv: python -m create_study_wise_data
+- Group dicom datas by study ids and store them in csv: python -m classification_3D.group_dicom_files_by_study_id [stage_1_train|stage_1_test]
 
 - Calculate and export predictions to csv: python -m export_predictions
 
