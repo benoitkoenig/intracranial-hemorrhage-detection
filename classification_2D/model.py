@@ -1,5 +1,3 @@
-from keras.applications.resnet50 import ResNet50
-from keras.applications.densenet import DenseNet169
 from keras.layers import Conv2D, Dense, Flatten, Input, MaxPool2D
 from keras.models import Model
 
