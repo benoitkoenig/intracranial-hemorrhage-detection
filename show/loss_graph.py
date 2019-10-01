@@ -12,8 +12,8 @@ def get_smooth_loss_per_epoch(loss_per_epoch):
     value = loss_per_epoch[0]
     smooth_loss_per_epoch = []
     momentum = .9
-    for i in range(len(loss_per_epoch)):
-        value = momentum * value + (1 - momentum) * loss_per_epoch[i]
+    for i in loss_per_epoch:
+        value = momentum * value + (1 - momentum) * i
         smooth_loss_per_epoch.append(value)
     return smooth_loss_per_epoch
 
