@@ -1,7 +1,8 @@
 import random
 
-from intracranial_hemorrhage_detection.classification_2D.params import subset_size, batch_size, input_image_size
-from intracranial_hemorrhage_detection.preprocess import get_all_images_list, get_input_images, get_all_true_labels
+from intracranial_hemorrhage_detection.classification_2D.params import subset_size, batch_size
+from intracranial_hemorrhage_detection.classification_2D.preprocess import get_input_images
+from intracranial_hemorrhage_detection.preprocess import get_all_images_list, get_all_true_labels
 
 def create_subset(images_list, true_labels):
     "Returns a subset with as many images with an hemorrhagge as without. Subset_size is defined in the params"
@@ -31,6 +32,6 @@ def training_generator():
     while (len(subset) != 0):
         batch = subset[0:batch_size]
         subset = subset[batch_size:]
-        X = get_input_images([filepath for (_, filepath) in batch], input_image_size)
+        X = get_input_images([filepath for (_, filepath) in batch])
         Y = [true_labels[id] for (id, _) in batch]
         yield ([X], [Y])
