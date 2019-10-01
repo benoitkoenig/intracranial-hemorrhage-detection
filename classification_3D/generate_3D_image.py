@@ -21,9 +21,9 @@ def check_dicom_data_consistency(dicom_datas):
         assert dicom_data["0028", "1052"] == dicom_data_0["0028", "1052"]
         assert dicom_data.RescaleSlope == 1
 
-def generate_3D_image(slices_ids):
+def generate_3D_image(slices_ids, folder="stage_1_train"):
     "All input slice ids must have the same study id. Outputs the voxels reconstructed for the given slices"
-    slices_filepaths = ["%s/data/stage_1_train_images/%s.dcm" % (folder_path, id) for id in slices_ids]
+    slices_filepaths = ["%s/data/%s_images/%s.dcm" % (folder_path, folder, id) for id in slices_ids]
     unsorted_dicom_datas = [get_dicom_data(filepath) for filepath in slices_filepaths]
     check_dicom_data_consistency(unsorted_dicom_datas)
     dicom_datas = sorted(unsorted_dicom_datas, key=lambda x: x["0020", "0032"][2])

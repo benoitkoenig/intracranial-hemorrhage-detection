@@ -1,9 +1,10 @@
 import cv2
 import math
 import numpy as np
+import pandas as pd
 
 from intracranial_hemorrhage_detection.classification_3D.params import input_slice_size
-from intracranial_hemorrhage_detection.constants import max_slices_per_study
+from intracranial_hemorrhage_detection.constants import max_slices_per_study, folder_path
 
 def preprocess_voxels(voxels):
     "Inputs a list of voxel. Outputs a numpy array with the right shape"
@@ -22,3 +23,11 @@ def add_padding(input):
     zeros_before = np.zeros([math.ceil(padding)] + list(input.shape[1:]))
     zeros_after = np.zeros([math.floor(padding)] + list(input.shape[1:]))
     return np.concatenate((zeros_before, input, zeros_after))
+
+def get_study_wise_data(folder):
+    "Returns the sudy-wise data as stored in the corresponding csv file. Folder should be one of 'stage_1_train', 'stage_1_test'"
+    assert (folder in ["stage_1_train", "stage_1_test"])
+    df = pd.read_csv("%s/outputs/study_ids_%s.csv" % (folder_path, folder))
+    grouped_slice_ids = df["slice_ids"].values
+    grouped_slice_ids = [eval(i) for i in grouped_slice_ids]
+    return grouped_slice_ids

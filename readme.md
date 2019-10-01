@@ -10,7 +10,9 @@ Author: Benoît Koenig
 
 - Group dicom datas by study ids and store them in csv: python -m classification_3D.group_dicom_files_by_study_id [stage_1_train|stage_1_test]
 
-- Calculate and export predictions to csv: python -m export_predictions
+- Calculate and export predictions from classifier_2D to csv: python -m export_predictions.classifier_2D
+
+- Calculate and export predictions from classifier_3D to csv: python -m export_predictions.classifier_3D
 
 - Visualize a single dicom file: python -m show.dicom_file [stage_1_train|stage_1_test] [index]
 
