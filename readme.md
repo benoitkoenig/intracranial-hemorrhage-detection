@@ -20,4 +20,4 @@ Author: Benoît Koenig
 
 - Visualize the 3D reconstruction for the 3D classifier: python -m show.reconstruction_3D
 
-- Move all probabilities upward or downward and save them in slided_results.csv: python -m export_predictions.slide_predictions [sliding_param]
+- Move all probabilities in results.csv upward or downward and save them in slided_results.csv: python -m export_predictions.slide_predictions [sliding_param]
