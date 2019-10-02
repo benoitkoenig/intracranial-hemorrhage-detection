@@ -3,8 +3,8 @@ import math
 import numpy as np
 import pandas as pd
 
-from intracranial_hemorrhage_detection.classification_3D.params import input_slice_size
-from intracranial_hemorrhage_detection.constants import max_slices_per_study, folder_path
+from intracranial_hemorrhage_detection.classification_3D.params import input_slice_size, max_slices_per_study
+from intracranial_hemorrhage_detection.constants import folder_path
 
 def preprocess_voxels(voxels):
     "Inputs a list of voxel. Outputs a numpy array with the right shape"

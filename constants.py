@@ -8,4 +8,3 @@ for i in range(len(labels)):
 stage_1_training_count = 674262
 stage_1_training_any_count = 97103
 stage_1_studies_count = 34 # edit with the real study count
-max_slices_per_study = 16 # edit when real value is known
