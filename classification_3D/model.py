@@ -53,7 +53,7 @@ def get_model():
     x = final_block(x, 256) # 64x2x2
     x = final_block(x, 512) # 64x1x1
 
-    assert x.shape[1:] == (max_slices_per_study, 1, 1, 256), "x should be of shape (?, %s, 1, 1, nb_channels), instead it is %s. You can use final_blocks to reduce with and height" % (max_slices_per_study, x.shape)
+    assert x.shape[1:] == (max_slices_per_study, 1, 1, 512), "x should be of shape (?, %s, 1, 1, nb_channels), instead it is %s. You can use final_blocks to reduce width and height" % (max_slices_per_study, x.shape)
     predictions = Conv3D(6, (1, 1, 1), padding="same", activation="sigmoid", kernel_initializer="he_uniform")(x)
     predictions = Reshape(target_shape=(max_slices_per_study, 6))(predictions)
 
