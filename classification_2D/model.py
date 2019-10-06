@@ -20,7 +20,7 @@ def get_model():
     x = get_bloc(x, 256)
     x = get_bloc(x, 512)
     x = get_bloc(x, 1024)
-    x = get_bloc(x, 2048)
+    # x = get_bloc(x, 2048)
 
     x = Flatten()(x)
     x = Dense(1024, activation='relu', kernel_initializer="he_uniform")(x)

@@ -5,5 +5,5 @@ batch_size = 8
 subset_size = 2 * stage_1_training_any_count
 epochs = subset_size // (steps_per_epoch * batch_size)
 
-input_image_size = 256
+input_image_size = 128
 model_weights_path = folder_path + "/weights/classifier.hdf5"
