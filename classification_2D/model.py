@@ -1,4 +1,4 @@
-from keras.layers import Conv2D, Dense, Flatten, Input, MaxPool2D
+from keras.layers import Concatenate, Conv2D, Dense, Flatten, Input, MaxPool2D
 from keras.models import Model
 
 from intracranial_hemorrhage_detection.classification_2D.params import input_image_size
@@ -7,6 +7,7 @@ def get_bloc(input, nb_channels):
     x = Conv2D(nb_channels, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(input)
     x = Conv2D(nb_channels, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
     x = Conv2D(nb_channels * 2, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
+    x = Concatenate()([input, x])
     x = MaxPool2D()(x)
     return x
 
