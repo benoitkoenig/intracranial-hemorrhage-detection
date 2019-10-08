@@ -7,7 +7,6 @@ def export():
     grouped_slice_ids = get_study_wise_data("stage_1_test")
     for slice_ids in grouped_slice_ids:
         predictions = get_3D_classifier_prediction(slice_ids)
-        for i in range(len(slice_ids)):
-            save_image_predictions_to_outputs_csv(slice_ids[i], predictions[i], "results_3D")
+        save_image_predictions_to_outputs_csv(slice_ids, predictions, "results_3D")
 
 export()
