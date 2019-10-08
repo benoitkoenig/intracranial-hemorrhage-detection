@@ -16,14 +16,15 @@ def get_model():
 
     input = Input(shape=(input_image_size, input_image_size, 1))
 
-    x = get_bloc(input, 64)
+    x = get_bloc(input, 32)
+    x = get_bloc(x, 64)
     x = get_bloc(x, 128)
     x = get_bloc(x, 256)
     x = get_bloc(x, 512)
     x = get_bloc(x, 1024)
-    # x = get_bloc(x, 2048)
 
     x = Flatten()(x)
+    x = Dense(1024, activation='relu', kernel_initializer="he_uniform")(x)
     x = Dense(1024, activation='relu', kernel_initializer="he_uniform")(x)
     predictions = Dense(6, activation='sigmoid')(x)
 
