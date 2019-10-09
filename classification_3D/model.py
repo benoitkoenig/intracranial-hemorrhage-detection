@@ -29,6 +29,7 @@ def final_block(input, nb_channels):
     x = Conv3D(nb_channels, (1, 3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(input)
     x = Conv3D(nb_channels, (1, 3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
     x = Conv3D(nb_channels, (1, 3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
+    x = Concatenate(axis=-1)([x, input])
     x = MaxPool3D((1, 2, 2))(x)
     return x
 
