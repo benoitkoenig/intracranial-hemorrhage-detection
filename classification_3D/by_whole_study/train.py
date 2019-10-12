@@ -1,7 +1,7 @@
 from keras.callbacks import CSVLogger, ModelCheckpoint
 from keras.optimizers import Adam
 
-from intracranial_hemorrhage_detection.constants import folder_path
+from intracranial_hemorrhage_detection.constants import training_logs_file
 from intracranial_hemorrhage_detection.classification_3D.by_whole_study.model import get_model
 from intracranial_hemorrhage_detection.classification_3D.by_whole_study.params import epochs, model_weights_path, steps_per_epoch, learning_rate
 from intracranial_hemorrhage_detection.classification_3D.by_whole_study.training_generator import training_generator
@@ -9,7 +9,7 @@ from intracranial_hemorrhage_detection.classification_3D.by_whole_study.training
 def train_classifier():
     callbacks = [
         ModelCheckpoint(model_weights_path),
-        CSVLogger("%s/outputs/classifier_3D_training_logs.csv" % folder_path),
+        CSVLogger(training_logs_file),
     ]
     model = get_model()
     model.compile(optimizer=Adam(learning_rate=learning_rate), loss="binary_crossentropy")
