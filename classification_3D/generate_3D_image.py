@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-from intracranial_hemorrhage_detection.classification_3D.by_whole_study.params import dtype, input_slice_size
 from intracranial_hemorrhage_detection.classification_3D.preprocess import preprocess_voxels
 from intracranial_hemorrhage_detection.constants import folder_path
 from intracranial_hemorrhage_detection.preprocess import get_dicom_data
@@ -22,7 +21,7 @@ def check_dicom_data_consistency(dicom_datas):
         assert dicom_data["0028", "1052"] == dicom_data_0["0028", "1052"], assertion_error_message
         assert dicom_data.RescaleSlope == 1, assertion_error_message
 
-def generate_3D_image(slices_ids, folder="stage_1_train"):
+def generate_3D_image(slices_ids, dtype, input_slice_size, folder="stage_1_train"):
     "All input slice ids must have the same study id. Outputs the voxels reconstructed for the given slices"
     slices_filepaths = ["%s/data/%s_images/%s.dcm" % (folder_path, folder, id) for id in slices_ids]
     unsorted_dicom_datas = [get_dicom_data(filepath) for filepath in slices_filepaths]
