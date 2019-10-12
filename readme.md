@@ -10,6 +10,8 @@ Author: Benoît Koenig
 
 - Train the 3D classifier by whole study: python -m classification_3D.by_whole_study.train
 
+- Train the 3D classifier by chunks: python -m classification_3D.by_chunks.train
+
 - Group dicom datas by study ids and store them in csv: python -m classification_3D.group_dicom_files_by_study_id [stage_1_train|stage_1_test]
 
 - Calculate and export predictions from classifier_2D to csv: python -m export_predictions.classifier_2D
