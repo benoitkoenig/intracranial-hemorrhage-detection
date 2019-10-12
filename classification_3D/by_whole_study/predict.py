@@ -1,10 +1,9 @@
 from keras.models import load_model
 import numpy as np
 
+from intracranial_hemorrhage_detection.classification_3D.by_whole_study.params import dtype, model_weights_path
+from intracranial_hemorrhage_detection.classification_3D.by_whole_study.padding import add_padding, remove_padding
 from intracranial_hemorrhage_detection.classification_3D.generate_3D_image import generate_3D_image
-from intracranial_hemorrhage_detection.classification_3D.params import dtype, model_weights_path
-from intracranial_hemorrhage_detection.classification_3D.postprocess import remove_padding
-from intracranial_hemorrhage_detection.classification_3D.preprocess import add_padding
 
 model = load_model(model_weights_path, compile=False)
 

@@ -2,8 +2,9 @@ import numpy as np
 import random
 
 from intracranial_hemorrhage_detection.classification_3D.generate_3D_image import generate_3D_image
-from intracranial_hemorrhage_detection.classification_3D.params import batch_size, dtype
-from intracranial_hemorrhage_detection.classification_3D.preprocess import add_padding, get_study_wise_data
+from intracranial_hemorrhage_detection.classification_3D.by_whole_study.padding import add_padding
+from intracranial_hemorrhage_detection.classification_3D.by_whole_study.params import batch_size, dtype
+from intracranial_hemorrhage_detection.classification_3D.preprocess import get_study_wise_data
 from intracranial_hemorrhage_detection.preprocess import get_all_true_labels
 
 def training_generator():

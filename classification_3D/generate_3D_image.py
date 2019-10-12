@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from intracranial_hemorrhage_detection.classification_3D.params import input_slice_size
+from intracranial_hemorrhage_detection.classification_3D.by_whole_study.params import dtype, input_slice_size
 from intracranial_hemorrhage_detection.classification_3D.preprocess import preprocess_voxels
 from intracranial_hemorrhage_detection.constants import folder_path
 from intracranial_hemorrhage_detection.preprocess import get_dicom_data
@@ -29,5 +29,5 @@ def generate_3D_image(slices_ids, folder="stage_1_train"):
     check_dicom_data_consistency(unsorted_dicom_datas)
     dicom_datas = sorted(unsorted_dicom_datas, key=lambda x: x["0020", "0032"][2])
     voxels = [dicom_data.pixel_array for dicom_data in dicom_datas]
-    voxels = preprocess_voxels(voxels)
+    voxels = preprocess_voxels(voxels, dtype, input_slice_size)
     return voxels
