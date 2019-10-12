@@ -16,6 +16,6 @@ def get_input_images(filepaths):
         image = cv2.resize(image, (input_image_size, input_image_size))
         image -= np.min(image)
         image /= np.max(image)
-        image = np.reshape(image, (input_image_size, input_image_size, 1))
+        image = np.stack([image, image, image], axis=-1) # stacks the channel input to make rgb images
         output.append(image)
     return np.array(output, dtype=dtype)

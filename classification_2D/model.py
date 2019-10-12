@@ -1,31 +1,21 @@
-from keras.layers import Concatenate, Conv2D, Dense, Flatten, Input, MaxPool2D
+import efficientnet.keras as efn
+from keras.layers import Dense, Dropout, GlobalAveragePooling2D
 from keras.models import Model
 
 from intracranial_hemorrhage_detection.classification_2D.params import input_image_size
 
-def get_bloc(input, nb_channels):
-    x = Conv2D(nb_channels, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(input)
-    x = Conv2D(nb_channels, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
-    x = Conv2D(nb_channels * 2, (3, 3), padding="same", activation="relu", kernel_initializer="he_uniform")(x)
-    x = Concatenate()([input, x])
-    x = MaxPool2D()(x)
-    return x
-
 def get_model():
-    "Returns the classifier model"
+    "Returns a classifier model"
+    efficient_net = efn.EfficientNetB0(
+        include_top=False,
+        weights="imagenet",
+        input_shape=(input_image_size, input_image_size, 3),
+    )
 
-    input = Input(shape=(input_image_size, input_image_size, 1))
-
-    x = get_bloc(input, 32)
-    x = get_bloc(x, 64)
-    x = get_bloc(x, 128)
-    x = get_bloc(x, 256)
-    x = get_bloc(x, 512)
-    x = get_bloc(x, 1024)
-
-    x = Flatten()(x)
-    x = Dense(1024, activation='relu', kernel_initializer="he_uniform")(x)
-    x = Dense(1024, activation='relu', kernel_initializer="he_uniform")(x)
+    x = efficient_net.output
+    x = GlobalAveragePooling2D()(x)
+    x = Dropout(0.2)(x)
     predictions = Dense(6, activation='sigmoid')(x)
+    model = Model(inputs=efficient_net.input, outputs=predictions)
 
-    return Model(inputs=input, outputs=predictions)
+    return model
