@@ -3,9 +3,9 @@ import numpy as np
 from intracranial_hemorrhage_detection.constants import folder_path, stage_1_studies_count
 
 chunk_size = 8
-batch_size = 8
+batch_size = 4
 chunk_wise_data_len = 1180
-steps_per_epoch = 2
+steps_per_epoch = 4
 epochs = chunk_wise_data_len // (steps_per_epoch * batch_size)
 dtype = np.float16
 
