@@ -16,7 +16,7 @@ def show_training_graph():
     plt.plot(smooth_loss_per_epoch)
     plt.gcf().canvas.set_window_title("Loss per epoch")
     plt.title("Loss per epoch")
-    plt.gca().axhline(y=.35, color="black", lw=1., alpha=.2)
+    plt.gca().axhline(y=.3, color="black", lw=1., alpha=.2)
 
     plt.show()
 
