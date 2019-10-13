@@ -1,5 +1,5 @@
 import efficientnet.keras as efn
-from keras.layers import Dense, Dropout, GlobalAveragePooling2D
+from keras.layers import Dense, GlobalAveragePooling2D
 from keras.models import Model
 
 from intracranial_hemorrhage_detection.classification_2D.params import input_image_size
@@ -14,7 +14,6 @@ def get_model():
 
     x = efficient_net.output
     x = GlobalAveragePooling2D()(x)
-    x = Dropout(0.2)(x)
     predictions = Dense(6, activation='sigmoid')(x)
     model = Model(inputs=efficient_net.input, outputs=predictions)
 
