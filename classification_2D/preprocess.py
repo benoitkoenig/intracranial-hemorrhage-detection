@@ -18,4 +18,12 @@ def get_input_images(filepaths):
         image /= np.max(image)
         image = np.stack([image, image, image], axis=-1) # stacks the channel input to make rgb images
         output.append(image)
-    return np.array(output, dtype=dtype)
+    output = np.array(output, dtype=dtype)
+
+    min_pixel = np.min(output)
+    max_pixel = np.max(output)
+    assert min_pixel == 0., "Expected image pixels to be within [0, 1], but minimum is %s for %s" % (min_pixel, filepaths)
+    assert max_pixel == 1., "Expected image pixels to be within [0, 1], but maximum is %s for %s" % (max_pixel, filepaths)
+    assert output.shape == (len(filepaths), input_image_size, input_image_size, 3)
+
+    return output
