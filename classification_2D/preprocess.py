@@ -15,7 +15,7 @@ def get_input_images(filepaths):
         image = np.array(dicom_data.pixel_array, dtype=np.float32) # must use float32 for cv2.resize, even if we use another dtype later
         image = cv2.resize(image, (input_image_size, input_image_size))
         image -= np.min(image)
-        image /= np.max(image)
+        image /= max(np.max(image), 1e-7)
         image = np.stack([image, image, image], axis=-1) # stacks the channel input to make rgb images
         output.append(image)
     output = np.array(output, dtype=dtype)
