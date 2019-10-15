@@ -11,8 +11,12 @@ def train_classifier():
         ModelCheckpoint(model_weights_path, save_weights_only=True),
         CSVLogger(training_logs_file),
     ]
+
+    gen = training_generator()
+    validation_data = next(gen)
+
     model = get_model()
     model.compile(optimizer=Adam(learning_rate=learning_rate), loss="binary_crossentropy")
-    model.fit_generator(training_generator(), steps_per_epoch=steps_per_epoch, epochs=epochs, callbacks=callbacks)
+    model.fit_generator(training_generator(), steps_per_epoch=steps_per_epoch, epochs=epochs, validation_data=validation_data, callbacks=callbacks)
 
 train_classifier()
