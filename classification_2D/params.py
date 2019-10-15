@@ -9,6 +9,7 @@ half_train_size = stage_1_training_any_count - half_test_size
 real_epochs = 20
 
 epochs = real_epochs * 2 * half_train_size // (steps_per_epoch * batch_size)
+validation_freq = 20
 
 input_image_size = 224
 learning_rate = 1e-5
