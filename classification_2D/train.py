@@ -8,7 +8,7 @@ from intracranial_hemorrhage_detection.classification_2D.training_generator impo
 
 def train_classifier():
     callbacks = [
-        ModelCheckpoint(model_weights_path, save_weights_only=True),
+        ModelCheckpoint(model_weights_path, save_weights_only=True, save_best_only=True, monitor="val_loss"),
         CSVLogger(training_logs_file),
     ]
 
