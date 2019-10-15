@@ -42,7 +42,7 @@ def training_generator():
 
     subset = []
     while (True):
-        if (len(subset) < batch_size):
+        if (len(subset) == 0):
             random.shuffle(none_train_set)
             subset = any_train_set + none_train_set[:half_train_size]
             random.shuffle(subset)
