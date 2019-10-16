@@ -16,7 +16,14 @@ def show_training_graph():
     plt.plot(val_loss_per_epoch)
     plt.gcf().canvas.set_window_title("Loss per epoch")
     plt.title("Loss per epoch")
-    plt.gca().axhline(y=.3, color="black", lw=1., alpha=.2)
+    plt.ylim(bottom=0, top=.3)
+    plt.xlim(left=0, right=6040)
+
+    axes = plt.gca()
+    for i in range(5):
+        axes.axhline(y=.05 * (i + 1), color="black", lw=1., alpha=.2)
+    for i in range(19):
+        axes.axvline(x=302 * (i + 1), color="black", lw=1., alpha=.2)
 
     plt.show()
 
