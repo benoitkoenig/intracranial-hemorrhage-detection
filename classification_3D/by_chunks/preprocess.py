@@ -12,6 +12,6 @@ def get_chunk_wise_data(folder):
     for image_ids in study_wise_images:
         nb_chunks = math.ceil(len(image_ids) / chunk_size)
         for i in range(nb_chunks - 1):
-            all_chunks.append(image_ids[i * nb_chunks : (i + 1) * nb_chunks])
+            all_chunks.append(image_ids[i * nb_chunks : i * nb_chunks + chunk_size])
         all_chunks.append(image_ids[-chunk_size:])
     return all_chunks
