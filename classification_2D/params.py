@@ -12,6 +12,6 @@ assert (2 * half_train_size) % (steps_per_epoch * batch_size) == 0
 epochs = real_epochs * 2 * half_train_size // (steps_per_epoch * batch_size)
 
 input_image_size = 224
-learning_rate = 1e-5
+learning_rate = 5e-5
 model_weights_path = folder_path + "/weights/classifier.hdf5"
 dtype = np.float32
