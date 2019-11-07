@@ -9,7 +9,7 @@ def get_all_images_list(folder):
     Loads a list of all images in a given folder name. Returns a list of (id, filepath)\n
     folder can be either 'stage_1_train' or 'stage_1_test'
     """
-    assert folder in ["stage_1_train", "stage_1_test"]
+    assert folder in ["stage_1_train", "stage_1_test", "stage_2_test"]
 
     dirname = folder_path + "/data/%s_images/" % folder
     return [(filename[:-4], dirname + filename) for filename in os.listdir(dirname)]

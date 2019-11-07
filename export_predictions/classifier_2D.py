@@ -4,9 +4,9 @@ from intracranial_hemorrhage_detection.preprocess import get_all_images_list
 
 batch_size = 2000
 
-def export():
+def export(folder):
     clear_outputs_csv("results_2D")
-    test_set = get_all_images_list("stage_1_test")
+    test_set = get_all_images_list(folder)
     while len(test_set) != 0:
         batch = test_set[:batch_size]
         test_set = test_set[batch_size:]
@@ -14,4 +14,4 @@ def export():
         ids = [id for (id, _) in batch]
         save_image_predictions_to_outputs_csv(ids, predictions, "results_2D")
 
-export()
+export("stage_2_test")
